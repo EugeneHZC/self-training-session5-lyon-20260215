@@ -151,7 +151,40 @@ namespace Session5_PromotionsApp
 
             Helper.db.SaveChanges();
 
+            Dictionary<Promotion, string> conflictedPromotions = getConflictProducts(promotion);
+
+            while (conflictedPromotions.Count > 0)
+            {
+                this.Hide();
+                new ConflictResolutionWizard(promotion, conflictedPromotions).ShowDialog();
+                this.Show();
+                promotion = Helper.db.Promotions.ToList().First(x => x.PromotionId == promotion.PromotionId);
+                conflictedPromotions = getConflictProducts(promotion);
+            }
+
             LoadData();
+        }
+
+        private Dictionary<Promotion, string> getConflictProducts(Promotion promotion)
+        {
+            var applicableProducts = promotion.ApplicableProducts.Split(",");
+            var allPromotions = Helper.db.Promotions.ToList();
+
+            Dictionary<Promotion, string> conflictedPromotions = new Dictionary<Promotion, string>();
+
+            foreach (var promo in allPromotions)
+            {
+                var products = promo.ApplicableProducts.Split(",");
+
+                if (promo.PromotionId != promotion.PromotionId && products.Any(x => applicableProducts.Contains(x)) &&
+                    promo.StartDate <= promotion.EndDate && promotion.StartDate <= promo.EndDate && promo.Priority == promotion.Priority)
+                {
+                    var productConflicted = products.Intersect(applicableProducts).ToList();
+                    conflictedPromotions[promo] = string.Join(",", productConflicted);
+                }
+            }
+
+            return conflictedPromotions;
         }
     }
 }
