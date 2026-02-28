@@ -9,6 +9,7 @@ namespace Session5_PromotionsApp
         private Promotion selectedConflictPromo;
         private string conflictedProducts;
         private const int maxStepIndex = 4;
+        private int priorityChanged;
 
         public ConflictResolutionWizard(Promotion currentPromotion, Dictionary<Promotion, string> allConflictedPromotions)
         {
@@ -46,18 +47,18 @@ namespace Session5_PromotionsApp
             }
         }
 
-        private void UpdateButton()
-        {
-            button2.Enabled = tabControl1.SelectedIndex != maxStepIndex;
-            button3.Enabled = tabControl1.SelectedIndex != 0;
-        }
-
         private void LoadStep2()
         {
             promotionBindingSource1.DataSource = selectedConflictPromo;
             textBox7.Text = conflictedProducts;
             textBox8.Text = $"{selectedConflictPromo.StartDate} - {selectedConflictPromo.EndDate}";
             textBox11.Text = $"{currentPromotion.StartDate} - {currentPromotion.EndDate}";
+        }
+
+        private void UpdateButton()
+        {
+            button2.Enabled = tabControl1.SelectedIndex != maxStepIndex;
+            button3.Enabled = tabControl1.SelectedIndex != 0;
         }
 
         private void UpdatePage()
@@ -103,6 +104,11 @@ namespace Session5_PromotionsApp
         private void button4_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 4;
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            priorityChanged = (int)numericUpDown1.Value;
         }
     }
 }

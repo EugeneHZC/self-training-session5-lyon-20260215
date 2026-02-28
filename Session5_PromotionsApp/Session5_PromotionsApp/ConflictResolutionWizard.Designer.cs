@@ -66,27 +66,40 @@
             label18 = new Label();
             label19 = new Label();
             tabPage3 = new TabPage();
-            tabPage4 = new TabPage();
-            tabPage5 = new TabPage();
-            panel2 = new Panel();
-            button4 = new Button();
-            button3 = new Button();
-            button2 = new Button();
             numericUpDown2 = new NumericUpDown();
             label20 = new Label();
             numericUpDown1 = new NumericUpDown();
             label21 = new Label();
             label22 = new Label();
             label23 = new Label();
+            tabPage4 = new TabPage();
+            label24 = new Label();
+            checkedListBox1 = new CheckedListBox();
+            label25 = new Label();
+            label26 = new Label();
+            dateTimePicker2 = new DateTimePicker();
+            label27 = new Label();
+            dateTimePicker1 = new DateTimePicker();
+            label28 = new Label();
+            textBox13 = new TextBox();
+            label29 = new Label();
+            label30 = new Label();
+            label31 = new Label();
+            tabPage5 = new TabPage();
+            panel2 = new Panel();
+            button4 = new Button();
+            button3 = new Button();
+            button2 = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)promotionBindingSource).BeginInit();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)promotionBindingSource1).BeginInit();
             tabPage3.SuspendLayout();
-            panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            tabPage4.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -99,7 +112,7 @@
             tabControl1.Location = new Point(0, 98);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(800, 626);
+            tabControl1.Size = new Size(875, 626);
             tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -121,7 +134,7 @@
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(792, 593);
+            tabPage1.Size = new Size(867, 593);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
@@ -283,7 +296,7 @@
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(792, 593);
+            tabPage2.Size = new Size(867, 593);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
@@ -463,27 +476,201 @@
             tabPage3.Location = new Point(4, 29);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(792, 593);
+            tabPage3.Size = new Size(867, 593);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "tabPage3";
             tabPage3.UseVisualStyleBackColor = true;
             // 
+            // numericUpDown2
+            // 
+            numericUpDown2.DataBindings.Add(new Binding("Value", promotionBindingSource, "Priority", true));
+            numericUpDown2.Enabled = false;
+            numericUpDown2.Location = new Point(202, 67);
+            numericUpDown2.Name = "numericUpDown2";
+            numericUpDown2.Size = new Size(221, 27);
+            numericUpDown2.TabIndex = 57;
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Location = new Point(34, 115);
+            label20.MaximumSize = new Size(700, 0);
+            label20.Name = "label20";
+            label20.Size = new Size(686, 40);
+            label20.TabIndex = 56;
+            label20.Text = "Changing priority may affect how promotions are applied and stacked. Higher nmbers indicate higher priority.";
+            // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Location = new Point(202, 176);
+            numericUpDown1.Maximum = new decimal(new int[] { 1215752192, 23, 0, 0 });
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(221, 27);
+            numericUpDown1.TabIndex = 55;
+            numericUpDown1.ValueChanged += numericUpDown1_ValueChanged;
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Location = new Point(34, 178);
+            label21.Name = "label21";
+            label21.Size = new Size(93, 20);
+            label21.TabIndex = 54;
+            label21.Text = "New Priority:";
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Location = new Point(34, 69);
+            label22.Name = "label22";
+            label22.Size = new Size(111, 20);
+            label22.TabIndex = 53;
+            label22.Text = "Current Priority:";
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label23.Location = new Point(30, 28);
+            label23.Name = "label23";
+            label23.Size = new Size(186, 23);
+            label23.TabIndex = 52;
+            label23.Text = "Step 3: Priority Change";
+            // 
             // tabPage4
             // 
+            tabPage4.Controls.Add(label24);
+            tabPage4.Controls.Add(checkedListBox1);
+            tabPage4.Controls.Add(label25);
+            tabPage4.Controls.Add(label26);
+            tabPage4.Controls.Add(dateTimePicker2);
+            tabPage4.Controls.Add(label27);
+            tabPage4.Controls.Add(dateTimePicker1);
+            tabPage4.Controls.Add(label28);
+            tabPage4.Controls.Add(textBox13);
+            tabPage4.Controls.Add(label29);
+            tabPage4.Controls.Add(label30);
+            tabPage4.Controls.Add(label31);
             tabPage4.Location = new Point(4, 29);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(792, 593);
+            tabPage4.Size = new Size(867, 593);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "tabPage4";
             tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Location = new Point(23, 441);
+            label24.Name = "label24";
+            label24.Size = new Size(375, 20);
+            label24.TabIndex = 69;
+            label24.Text = "Conflict resolved! You can proceed to save the changes.";
+            // 
+            // checkedListBox1
+            // 
+            checkedListBox1.CheckOnClick = true;
+            checkedListBox1.FormattingEnabled = true;
+            checkedListBox1.Location = new Point(23, 310);
+            checkedListBox1.Name = "checkedListBox1";
+            checkedListBox1.Size = new Size(450, 114);
+            checkedListBox1.TabIndex = 68;
+            // 
+            // label25
+            // 
+            label25.AutoSize = true;
+            label25.Location = new Point(23, 270);
+            label25.Name = "label25";
+            label25.Size = new Size(322, 20);
+            label25.TabIndex = 67;
+            label25.Text = "Select products to remove from the promotion:";
+            // 
+            // label26
+            // 
+            label26.AutoSize = true;
+            label26.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label26.Location = new Point(23, 224);
+            label26.Name = "label26";
+            label26.Size = new Size(174, 28);
+            label26.TabIndex = 66;
+            label26.Text = "Product Removal";
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.Location = new Point(566, 160);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(250, 27);
+            dateTimePicker2.TabIndex = 65;
+            // 
+            // label27
+            // 
+            label27.AutoSize = true;
+            label27.Location = new Point(432, 165);
+            label27.Name = "label27";
+            label27.Size = new Size(107, 20);
+            label27.TabIndex = 64;
+            label27.Text = "New End Date:";
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(157, 160);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(250, 27);
+            dateTimePicker1.TabIndex = 63;
+            // 
+            // label28
+            // 
+            label28.AutoSize = true;
+            label28.Location = new Point(23, 165);
+            label28.Name = "label28";
+            label28.Size = new Size(113, 20);
+            label28.TabIndex = 62;
+            label28.Text = "New Start Date:";
+            // 
+            // textBox13
+            // 
+            textBox13.Location = new Point(189, 111);
+            textBox13.Name = "textBox13";
+            textBox13.ReadOnly = true;
+            textBox13.Size = new Size(269, 27);
+            textBox13.TabIndex = 61;
+            // 
+            // label29
+            // 
+            label29.AutoSize = true;
+            label29.Location = new Point(23, 114);
+            label29.Name = "label29";
+            label29.Size = new Size(142, 20);
+            label29.TabIndex = 60;
+            label29.Text = "Current Date Range:";
+            // 
+            // label30
+            // 
+            label30.AutoSize = true;
+            label30.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label30.Location = new Point(23, 69);
+            label30.Name = "label30";
+            label30.Size = new Size(173, 28);
+            label30.TabIndex = 59;
+            label30.Text = "Date Adjustment";
+            // 
+            // label31
+            // 
+            label31.AutoSize = true;
+            label31.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label31.Location = new Point(23, 21);
+            label31.Name = "label31";
+            label31.Size = new Size(264, 23);
+            label31.TabIndex = 58;
+            label31.Text = "Step 4: Date/Product Adjustment";
             // 
             // tabPage5
             // 
             tabPage5.Location = new Point(4, 29);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new Padding(3);
-            tabPage5.Size = new Size(792, 593);
+            tabPage5.Size = new Size(867, 593);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "tabPage5";
             tabPage5.UseVisualStyleBackColor = true;
@@ -496,7 +683,7 @@
             panel2.Dock = DockStyle.Bottom;
             panel2.Location = new Point(0, 727);
             panel2.Name = "panel2";
-            panel2.Size = new Size(800, 52);
+            panel2.Size = new Size(875, 52);
             panel2.TabIndex = 22;
             // 
             // button4
@@ -530,66 +717,11 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
-            // numericUpDown2
-            // 
-            numericUpDown2.DataBindings.Add(new Binding("Value", promotionBindingSource, "Priority", true));
-            numericUpDown2.Enabled = false;
-            numericUpDown2.Location = new Point(202, 67);
-            numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new Size(221, 27);
-            numericUpDown2.TabIndex = 57;
-            // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.Location = new Point(34, 115);
-            label20.MaximumSize = new Size(700, 0);
-            label20.Name = "label20";
-            label20.Size = new Size(686, 40);
-            label20.TabIndex = 56;
-            label20.Text = "Changing priority may affect how promotions are applied and stacked. Higher nmbers indicate higher priority.";
-            // 
-            // numericUpDown1
-            // 
-            numericUpDown1.Location = new Point(202, 176);
-            numericUpDown1.Maximum = new decimal(new int[] { 1215752192, 23, 0, 0 });
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(221, 27);
-            numericUpDown1.TabIndex = 55;
-            // 
-            // label21
-            // 
-            label21.AutoSize = true;
-            label21.Location = new Point(34, 178);
-            label21.Name = "label21";
-            label21.Size = new Size(93, 20);
-            label21.TabIndex = 54;
-            label21.Text = "New Priority:";
-            // 
-            // label22
-            // 
-            label22.AutoSize = true;
-            label22.Location = new Point(34, 69);
-            label22.Name = "label22";
-            label22.Size = new Size(111, 20);
-            label22.TabIndex = 53;
-            label22.Text = "Current Priority:";
-            // 
-            // label23
-            // 
-            label23.AutoSize = true;
-            label23.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label23.Location = new Point(30, 28);
-            label23.Name = "label23";
-            label23.Size = new Size(186, 23);
-            label23.TabIndex = 52;
-            label23.Text = "Step 3: Priority Change";
-            // 
             // ConflictResolutionWizard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 779);
+            ClientSize = new Size(875, 779);
             Controls.Add(panel2);
             Controls.Add(tabControl1);
             Name = "ConflictResolutionWizard";
@@ -605,9 +737,11 @@
             ((System.ComponentModel.ISupportInitialize)promotionBindingSource1).EndInit();
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
-            panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            tabPage4.ResumeLayout(false);
+            tabPage4.PerformLayout();
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -662,5 +796,17 @@
         private Label label21;
         private Label label22;
         private Label label23;
+        private Label label24;
+        private CheckedListBox checkedListBox1;
+        private Label label25;
+        private Label label26;
+        private DateTimePicker dateTimePicker2;
+        private Label label27;
+        private DateTimePicker dateTimePicker1;
+        private Label label28;
+        private TextBox textBox13;
+        private Label label29;
+        private Label label30;
+        private Label label31;
     }
 }
