@@ -4,32 +4,34 @@ namespace Session5_PromotionsApp
 {
     public partial class ConflictResolutionWizard : Form1
     {
-        private Dictionary<Promotion, string> conflictedPromotions;
-        public string conflictedProducts;
+        private Dictionary<Promotion, string> allConflictedPromotions;
+        private Promotion currentPromotion;
+        private Promotion selectedConflictPromo;
+        private string conflictedProducts;
         private const int maxStepIndex = 4;
 
-        public ConflictResolutionWizard(Promotion promotion, Dictionary<Promotion, string> conflictedPromotions)
+        public ConflictResolutionWizard(Promotion currentPromotion, Dictionary<Promotion, string> allConflictedPromotions)
         {
             InitializeComponent();
-            ConflictResolutionWizardHelper.promotion = promotion;
-            this.conflictedPromotions = conflictedPromotions;
+            this.currentPromotion = currentPromotion;
+            this.allConflictedPromotions = allConflictedPromotions;
             LoadData();
             button3.Enabled = false;
         }
 
         private void LoadData()
         {
-            promotionBindingSource.DataSource = ConflictResolutionWizardHelper.promotion;
-            textBox2.Text = $"{ConflictResolutionWizardHelper.promotion.DiscountType} {ConflictResolutionWizardHelper.promotion.DiscountValue}{(ConflictResolutionWizardHelper.promotion.DiscountType == "Percentage" ? "%" : " euros")}";
-            textBox4.Text = $"{ConflictResolutionWizardHelper.promotion.StartDate} - {ConflictResolutionWizardHelper.promotion.EndDate}";
+            promotionBindingSource.DataSource = currentPromotion;
+            textBox2.Text = $"{currentPromotion.DiscountType} {currentPromotion.DiscountValue}{(currentPromotion.DiscountType == "Percentage" ? "%" : " euros")}";
+            textBox4.Text = $"{currentPromotion.StartDate} - {currentPromotion.EndDate}";
 
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.WrapContents = false;
             flowLayoutPanel1.AutoScroll = true;
 
-            for (int i = 0; i < conflictedPromotions.Count(); i++)
+            for (int i = 0; i < allConflictedPromotions.Count(); i++)
             {
-                var promo = conflictedPromotions.ToList()[i];
+                var promo = allConflictedPromotions.ToList()[i];
                 RadioButton radioButton = new RadioButton();
                 radioButton.Tag = promo;
                 radioButton.AutoSize = true;
@@ -49,11 +51,39 @@ namespace Session5_PromotionsApp
             button3.Enabled = tabControl1.SelectedIndex != 0;
         }
 
+        private void UpdatePage()
+        {
+            switch (tabControl1.SelectedIndex)
+            {
+                case 0:
+                    break;
+                case 1:
+                    promotionBindingSource1.DataSource = selectedConflictPromo;
+                    textBox7.Text = conflictedProducts;
+                    textBox8.Text = $"{selectedConflictPromo.StartDate} - {selectedConflictPromo.EndDate}";
+                    textBox11.Text = $"{currentPromotion.StartDate} - {currentPromotion.EndDate}";
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedIndex++;
-            tabControl1.SelectedIndex = Math.Max(0, Math.Min(maxStepIndex, tabControl1.SelectedIndex));
-            UpdateButton();
+            var selectedRadioButton = flowLayoutPanel1.Controls.OfType<RadioButton>().FirstOrDefault(x => x.Checked);
+
+            if (selectedRadioButton != null)
+            {
+                var selected = (KeyValuePair<Promotion, string>)selectedRadioButton.Tag;
+                selectedConflictPromo = selected.Key;
+                conflictedProducts = selected.Value;
+
+                tabControl1.SelectedIndex++;
+                tabControl1.SelectedIndex = Math.Max(0, Math.Min(maxStepIndex, tabControl1.SelectedIndex));
+                UpdateButton();
+            }
+
+            UpdatePage();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -61,6 +91,11 @@ namespace Session5_PromotionsApp
             tabControl1.SelectedIndex--;
             tabControl1.SelectedIndex = Math.Max(0, Math.Min(maxStepIndex, tabControl1.SelectedIndex));
             UpdateButton();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 4;
         }
     }
 }
