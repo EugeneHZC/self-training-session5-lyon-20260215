@@ -46,18 +46,26 @@ namespace Session5_PromotionsApp
             }
         }
 
-        private void UpdateButton()
-        {
-            button2.Enabled = tabControl1.SelectedIndex != maxStepIndex;
-            button3.Enabled = tabControl1.SelectedIndex != 0;
-        }
-
         private void LoadStep2()
         {
             promotionBindingSource1.DataSource = selectedConflictPromo;
             textBox7.Text = conflictedProducts;
             textBox8.Text = $"{selectedConflictPromo.StartDate} - {selectedConflictPromo.EndDate}";
             textBox11.Text = $"{currentPromotion.StartDate} - {currentPromotion.EndDate}";
+        }
+
+        private void LoadStep4()
+        {
+            textBox13.Text = $"{currentPromotion.StartDate} - {currentPromotion.EndDate}";
+
+            checkedListBox1.Items.Clear();
+            checkedListBox1.Items.AddRange(conflictedProducts.Split(","));
+        }
+
+        private void UpdateButton()
+        {
+            button2.Enabled = tabControl1.SelectedIndex != maxStepIndex;
+            button3.Enabled = tabControl1.SelectedIndex != 0;
         }
 
         private void UpdatePage()
@@ -69,6 +77,9 @@ namespace Session5_PromotionsApp
                     break;
                 case 1:
                     LoadStep2();
+                    break;
+                case 3:
+                    LoadStep4();
                     break;
                 default:
                     break;
