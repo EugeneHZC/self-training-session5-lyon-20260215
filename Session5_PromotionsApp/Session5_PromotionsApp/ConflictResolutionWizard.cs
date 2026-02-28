@@ -15,11 +15,12 @@ namespace Session5_PromotionsApp
             InitializeComponent();
             this.currentPromotion = currentPromotion;
             this.allConflictedPromotions = allConflictedPromotions;
-            LoadData();
+            tabControl1.SelectedIndex = 0;
+            UpdatePage();
             button3.Enabled = false;
         }
 
-        private void LoadData()
+        private void LoadStep1()
         {
             promotionBindingSource.DataSource = currentPromotion;
             textBox2.Text = $"{currentPromotion.DiscountType} {currentPromotion.DiscountValue}{(currentPromotion.DiscountType == "Percentage" ? "%" : " euros")}";
@@ -51,17 +52,23 @@ namespace Session5_PromotionsApp
             button3.Enabled = tabControl1.SelectedIndex != 0;
         }
 
+        private void LoadStep2()
+        {
+            promotionBindingSource1.DataSource = selectedConflictPromo;
+            textBox7.Text = conflictedProducts;
+            textBox8.Text = $"{selectedConflictPromo.StartDate} - {selectedConflictPromo.EndDate}";
+            textBox11.Text = $"{currentPromotion.StartDate} - {currentPromotion.EndDate}";
+        }
+
         private void UpdatePage()
         {
             switch (tabControl1.SelectedIndex)
             {
                 case 0:
+                    LoadStep1();
                     break;
                 case 1:
-                    promotionBindingSource1.DataSource = selectedConflictPromo;
-                    textBox7.Text = conflictedProducts;
-                    textBox8.Text = $"{selectedConflictPromo.StartDate} - {selectedConflictPromo.EndDate}";
-                    textBox11.Text = $"{currentPromotion.StartDate} - {currentPromotion.EndDate}";
+                    LoadStep2();
                     break;
                 default:
                     break;

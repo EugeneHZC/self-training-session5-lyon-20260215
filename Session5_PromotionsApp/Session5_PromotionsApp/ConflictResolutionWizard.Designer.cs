@@ -47,16 +47,10 @@
             label3 = new Label();
             label2 = new Label();
             tabPage2 = new TabPage();
-            tabPage3 = new TabPage();
-            tabPage4 = new TabPage();
-            tabPage5 = new TabPage();
-            panel2 = new Panel();
-            button4 = new Button();
-            button3 = new Button();
-            button2 = new Button();
             textBox7 = new TextBox();
             label11 = new Label();
             textBox6 = new TextBox();
+            promotionBindingSource1 = new BindingSource(components);
             label9 = new Label();
             textBox8 = new TextBox();
             label10 = new Label();
@@ -71,13 +65,28 @@
             textBox12 = new TextBox();
             label18 = new Label();
             label19 = new Label();
-            promotionBindingSource1 = new BindingSource(components);
+            tabPage3 = new TabPage();
+            tabPage4 = new TabPage();
+            tabPage5 = new TabPage();
+            panel2 = new Panel();
+            button4 = new Button();
+            button3 = new Button();
+            button2 = new Button();
+            numericUpDown2 = new NumericUpDown();
+            label20 = new Label();
+            numericUpDown1 = new NumericUpDown();
+            label21 = new Label();
+            label22 = new Label();
+            label23 = new Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)promotionBindingSource).BeginInit();
             tabPage2.SuspendLayout();
-            panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)promotionBindingSource1).BeginInit();
+            tabPage3.SuspendLayout();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -279,78 +288,6 @@
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
-            // 
-            tabPage3.Location = new Point(4, 29);
-            tabPage3.Name = "tabPage3";
-            tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(792, 593);
-            tabPage3.TabIndex = 2;
-            tabPage3.Text = "tabPage3";
-            tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            tabPage4.Location = new Point(4, 29);
-            tabPage4.Name = "tabPage4";
-            tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(792, 593);
-            tabPage4.TabIndex = 3;
-            tabPage4.Text = "tabPage4";
-            tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // tabPage5
-            // 
-            tabPage5.Location = new Point(4, 29);
-            tabPage5.Name = "tabPage5";
-            tabPage5.Padding = new Padding(3);
-            tabPage5.Size = new Size(792, 593);
-            tabPage5.TabIndex = 4;
-            tabPage5.Text = "tabPage5";
-            tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            panel2.Controls.Add(button4);
-            panel2.Controls.Add(button3);
-            panel2.Controls.Add(button2);
-            panel2.Dock = DockStyle.Bottom;
-            panel2.Location = new Point(0, 727);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(800, 52);
-            panel2.TabIndex = 22;
-            // 
-            // button4
-            // 
-            button4.Location = new Point(527, 3);
-            button4.Name = "button4";
-            button4.Size = new Size(82, 29);
-            button4.TabIndex = 22;
-            button4.Text = "Cancel";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
-            // 
-            // button3
-            // 
-            button3.Enabled = false;
-            button3.Location = new Point(627, 3);
-            button3.Name = "button3";
-            button3.Size = new Size(68, 29);
-            button3.TabIndex = 21;
-            button3.Text = "Back";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(711, 3);
-            button2.Name = "button2";
-            button2.Size = new Size(68, 29);
-            button2.TabIndex = 20;
-            button2.Text = "Next";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
             // textBox7
             // 
             textBox7.Location = new Point(215, 477);
@@ -377,6 +314,10 @@
             textBox6.ReadOnly = true;
             textBox6.Size = new Size(360, 27);
             textBox6.TabIndex = 57;
+            // 
+            // promotionBindingSource1
+            // 
+            promotionBindingSource1.DataSource = typeof(models.Promotion);
             // 
             // label9
             // 
@@ -511,9 +452,138 @@
             label19.TabIndex = 43;
             label19.Text = "New/Edited Promotion Details";
             // 
-            // promotionBindingSource1
+            // tabPage3
             // 
-            promotionBindingSource1.DataSource = typeof(models.Promotion);
+            tabPage3.Controls.Add(numericUpDown2);
+            tabPage3.Controls.Add(label20);
+            tabPage3.Controls.Add(numericUpDown1);
+            tabPage3.Controls.Add(label21);
+            tabPage3.Controls.Add(label22);
+            tabPage3.Controls.Add(label23);
+            tabPage3.Location = new Point(4, 29);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new Size(792, 593);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "tabPage3";
+            tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            tabPage4.Location = new Point(4, 29);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new Padding(3);
+            tabPage4.Size = new Size(792, 593);
+            tabPage4.TabIndex = 3;
+            tabPage4.Text = "tabPage4";
+            tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tabPage5
+            // 
+            tabPage5.Location = new Point(4, 29);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Padding = new Padding(3);
+            tabPage5.Size = new Size(792, 593);
+            tabPage5.TabIndex = 4;
+            tabPage5.Text = "tabPage5";
+            tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(button4);
+            panel2.Controls.Add(button3);
+            panel2.Controls.Add(button2);
+            panel2.Dock = DockStyle.Bottom;
+            panel2.Location = new Point(0, 727);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(800, 52);
+            panel2.TabIndex = 22;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(527, 3);
+            button4.Name = "button4";
+            button4.Size = new Size(82, 29);
+            button4.TabIndex = 22;
+            button4.Text = "Cancel";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
+            // button3
+            // 
+            button3.Enabled = false;
+            button3.Location = new Point(627, 3);
+            button3.Name = "button3";
+            button3.Size = new Size(68, 29);
+            button3.TabIndex = 21;
+            button3.Text = "Back";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(711, 3);
+            button2.Name = "button2";
+            button2.Size = new Size(68, 29);
+            button2.TabIndex = 20;
+            button2.Text = "Next";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // numericUpDown2
+            // 
+            numericUpDown2.DataBindings.Add(new Binding("Value", promotionBindingSource, "Priority", true));
+            numericUpDown2.Enabled = false;
+            numericUpDown2.Location = new Point(202, 67);
+            numericUpDown2.Name = "numericUpDown2";
+            numericUpDown2.Size = new Size(221, 27);
+            numericUpDown2.TabIndex = 57;
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Location = new Point(34, 115);
+            label20.MaximumSize = new Size(700, 0);
+            label20.Name = "label20";
+            label20.Size = new Size(686, 40);
+            label20.TabIndex = 56;
+            label20.Text = "Changing priority may affect how promotions are applied and stacked. Higher nmbers indicate higher priority.";
+            // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Location = new Point(202, 176);
+            numericUpDown1.Maximum = new decimal(new int[] { 1215752192, 23, 0, 0 });
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(221, 27);
+            numericUpDown1.TabIndex = 55;
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Location = new Point(34, 178);
+            label21.Name = "label21";
+            label21.Size = new Size(93, 20);
+            label21.TabIndex = 54;
+            label21.Text = "New Priority:";
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Location = new Point(34, 69);
+            label22.Name = "label22";
+            label22.Size = new Size(111, 20);
+            label22.TabIndex = 53;
+            label22.Text = "Current Priority:";
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label23.Location = new Point(30, 28);
+            label23.Name = "label23";
+            label23.Size = new Size(186, 23);
+            label23.TabIndex = 52;
+            label23.Text = "Step 3: Priority Change";
             // 
             // ConflictResolutionWizard
             // 
@@ -532,8 +602,12 @@
             ((System.ComponentModel.ISupportInitialize)promotionBindingSource).EndInit();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
-            panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)promotionBindingSource1).EndInit();
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
+            panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
         }
 
@@ -582,5 +656,11 @@
         private Label label18;
         private Label label19;
         private BindingSource promotionBindingSource1;
+        private NumericUpDown numericUpDown2;
+        private Label label20;
+        private NumericUpDown numericUpDown1;
+        private Label label21;
+        private Label label22;
+        private Label label23;
     }
 }
