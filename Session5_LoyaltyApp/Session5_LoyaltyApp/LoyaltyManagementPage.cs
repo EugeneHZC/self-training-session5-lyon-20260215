@@ -61,6 +61,7 @@ namespace Session5_LoyaltyApp
             label3.Text = $"Page {currentPage + 1} of {maxPages}";
 
             dataGridView1.ClearSelection();
+            groupBox1.Hide();
             dataGridView1.Enabled = true;
             UpdateButtonState();
         }
@@ -85,6 +86,44 @@ namespace Session5_LoyaltyApp
             currentPage = Math.Max(0, Math.Min(maxPages - 1, currentPage));
             LoadTable();
             UpdateButtonState();
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            groupBox1.Show();
+            customerBindingSource1.ResetCurrentItem();
+            loyaltyProgramBindingSource.ResetCurrentItem();
+
+            if (dataGridView1.SelectedRows.Count > 0 && dataGridView1.Enabled)
+            {
+                var customer = dataGridView1.SelectedRows[0].Tag as Customer;
+                customerBindingSource1.DataSource = customer;
+                loyaltyProgramBindingSource.DataSource = loyaltyPrograms.FirstOrDefault(x => x.CustomerId == customer.CustomerId);
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Helper.db.ChangeTracker.Entries().ToList().ForEach(x => x.State = Microsoft.EntityFrameworkCore.EntityState.Unchanged);
+            dataGridView1.ClearSelection();
+            groupBox1.Hide();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            var loyaltyProgram = loyaltyProgramBindingSource.Current as LoyaltyProgram;
+            Helper.db.LoyaltyPrograms.Entry(loyaltyProgram).State = EntityState.Modified;
+            Helper.db.SaveChanges();
+            MessageBox.Show("Changes saved successfully.", "Success", MessageBoxButtons.OK);
+            dataGridView1.ClearSelection();
+            groupBox1.Hide();
+            LoadTable();
+        }
+
+        private async void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            await Task.Delay(200);
+            LoadTable();
         }
     }
 }
