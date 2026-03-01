@@ -43,27 +43,30 @@ namespace Session5_PromotionsApp
 
         private void LoadStep1()
         {
-            promotionBindingSource.DataSource = currentPromotion;
-            textBox2.Text = $"{currentPromotion.DiscountType} {currentPromotion.DiscountValue}{(currentPromotion.DiscountType == "Percentage" ? "%" : " euros")}";
-            textBox4.Text = $"{currentPromotion.StartDate} - {currentPromotion.EndDate}";
-
-            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.WrapContents = false;
-            flowLayoutPanel1.AutoScroll = true;
-
-            for (int i = 0; i < allConflictedPromotions.Count(); i++)
+            if (flowLayoutPanel1.Controls.Count == 0)
             {
-                var promo = allConflictedPromotions.ToList()[i];
-                RadioButton radioButton = new RadioButton();
-                radioButton.Tag = promo;
-                radioButton.AutoSize = true;
-                radioButton.MaximumSize = new Size(500, 0);
-                radioButton.Text = $"Conflict {i + 1}\n" +
-                    $"Existing Promotion: {promo.Key.PromotionName}\n" +
-                    $"Conflicting Product: {promo.Value}\n" +
-                    $"Date Range: {promo.Key.StartDate} - {promo.Key.EndDate}\n" +
-                    $"Priority: {promo.Key.Priority}\n";
-                flowLayoutPanel1.Controls.Add(radioButton);
+                promotionBindingSource.DataSource = currentPromotion;
+                textBox2.Text = $"{currentPromotion.DiscountType} {currentPromotion.DiscountValue}{(currentPromotion.DiscountType == "Percentage" ? "%" : " euros")}";
+                textBox4.Text = $"{currentPromotion.StartDate} - {currentPromotion.EndDate}";
+
+                flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
+                flowLayoutPanel1.WrapContents = false;
+                flowLayoutPanel1.AutoScroll = true;
+
+                for (int i = 0; i < allConflictedPromotions.Count(); i++)
+                {
+                    var promo = allConflictedPromotions.ToList()[i];
+                    RadioButton radioButton = new RadioButton();
+                    radioButton.Tag = promo;
+                    radioButton.AutoSize = true;
+                    radioButton.MaximumSize = new Size(500, 0);
+                    radioButton.Text = $"Conflict {i + 1}\n" +
+                        $"Existing Promotion: {promo.Key.PromotionName}\n" +
+                        $"Conflicting Product: {promo.Value}\n" +
+                        $"Date Range: {promo.Key.StartDate} - {promo.Key.EndDate}\n" +
+                        $"Priority: {promo.Key.Priority}\n";
+                    flowLayoutPanel1.Controls.Add(radioButton);
+                }
             }
         }
 
@@ -108,8 +111,10 @@ namespace Session5_PromotionsApp
         {
             textBox13.Text = $"{currentPromotion.StartDate} - {currentPromotion.EndDate}";
 
-            checkedListBox1.Items.Clear();
-            checkedListBox1.Items.AddRange(conflictedProducts.Split(","));
+            if (checkedListBox1.Items.Count == 0)
+            {
+                checkedListBox1.Items.AddRange(conflictedProducts.Split(","));
+            }
 
             button2.Enabled = false;
             button2.Text = "Save";
