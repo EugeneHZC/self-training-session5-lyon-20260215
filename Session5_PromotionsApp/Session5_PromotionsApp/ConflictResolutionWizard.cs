@@ -15,6 +15,7 @@ namespace Session5_PromotionsApp
         private bool dateValid = false;
         private bool itemsValid = false;
         private List<string> productsToRemove;
+        private int pixelsPerDay = 10;
 
         public ConflictResolutionWizard(Promotion currentPromotion, Dictionary<Promotion, string> allConflictedPromotions)
         {
@@ -72,6 +73,35 @@ namespace Session5_PromotionsApp
             textBox7.Text = conflictedProducts;
             textBox8.Text = $"{selectedConflictPromo.StartDate} - {selectedConflictPromo.EndDate}";
             textBox11.Text = $"{currentPromotion.StartDate} - {currentPromotion.EndDate}";
+
+            var latestEndDate = Math.Max(currentPromotion.EndDate.DayNumber, selectedConflictPromo.EndDate.DayNumber);
+            var earliestStartDate = Math.Min(currentPromotion.StartDate.DayNumber, selectedConflictPromo.StartDate.DayNumber);
+
+            var currPromotionDateDiff = currentPromotion.EndDate.DayNumber - currentPromotion.StartDate.DayNumber;
+            var conflictedPromotionDateDiff = selectedConflictPromo.EndDate.DayNumber - selectedConflictPromo.StartDate.DayNumber;
+
+            var conflictPromoXPos = (selectedConflictPromo.StartDate.DayNumber - earliestStartDate) * pixelsPerDay;
+            var currPromoXPos = (currentPromotion.StartDate.DayNumber - earliestStartDate) * pixelsPerDay;
+            progressBar1.Location = new System.Drawing.Point(conflictPromoXPos, 20);
+            progressBar2.Location = new System.Drawing.Point(currPromoXPos, 100);
+
+            if (selectedConflictPromo.EndDate > currentPromotion.EndDate)
+            {
+                progressBar2.Width = (currPromotionDateDiff) * pixelsPerDay;
+            }
+            else
+            {
+                progressBar1.Width = (conflictedPromotionDateDiff) * pixelsPerDay;
+            }
+
+            progressBar1.BackColor = Color.LightGray;
+            progressBar2.BackColor = Color.Gray;
+
+            label38.Text = selectedConflictPromo.PromotionName;
+            label37.Text = currentPromotion.PromotionName;
+
+            label36.Text = currentPromotion.StartDate > selectedConflictPromo.StartDate ? $"{selectedConflictPromo.StartDate:yyyy-MM-dd}" : $"{currentPromotion.StartDate:yyyy-MM-dd}";
+            label35.Text = currentPromotion.EndDate > selectedConflictPromo.EndDate ? $"{currentPromotion.EndDate:yyyy-MM-dd}" : $"{selectedConflictPromo.StartDate:yyyy-MM-dd}";
         }
 
         private void LoadStep4()
