@@ -16,6 +16,7 @@ namespace Session5_LoyaltyApp
         {
             InitializeComponent();
             LoadData();
+            button8.Visible = false;
         }
 
         private void LoadData()
@@ -176,6 +177,21 @@ namespace Session5_LoyaltyApp
             numericUpDown1.Value = points;
             MessageBox.Show("Points updated successfully.", "Success", MessageBoxButtons.OK);
             groupBox2.Hide();
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            button8.Visible = numericUpDown1.Value >= 1000;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            var customer = dataGridView1.SelectedRows[0].Tag as Customer;
+            var loyalty = loyaltyPrograms.FirstOrDefault(x => x.CustomerId == customer.CustomerId);
+            new RedeemRewardsPage(customer, loyalty).ShowDialog();
+            loyaltyProgramBindingSource.ResetCurrentItem();
+            loyaltyProgramBindingSource.DataSource = loyalty;
+            LoadTable();
         }
     }
 }

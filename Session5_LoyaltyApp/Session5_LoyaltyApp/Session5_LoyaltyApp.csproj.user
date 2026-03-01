@@ -7,5 +7,8 @@
     <Compile Update="LoyaltyManagementPage.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="RedeemRewardsPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

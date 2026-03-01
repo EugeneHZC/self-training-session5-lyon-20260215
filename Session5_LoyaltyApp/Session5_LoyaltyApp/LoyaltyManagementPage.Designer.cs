@@ -44,6 +44,7 @@
             customerBindingSource = new BindingSource(components);
             textBox1 = new TextBox();
             groupBox1 = new GroupBox();
+            button8 = new Button();
             groupBox2 = new GroupBox();
             button7 = new Button();
             label10 = new Label();
@@ -212,6 +213,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(button8);
             groupBox1.Controls.Add(groupBox2);
             groupBox1.Controls.Add(button6);
             groupBox1.Controls.Add(button5);
@@ -236,13 +238,23 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Customer Details";
             // 
+            // button8
+            // 
+            button8.Location = new Point(15, 376);
+            button8.Name = "button8";
+            button8.Size = new Size(167, 29);
+            button8.TabIndex = 17;
+            button8.Text = "Redeem Rewards";
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += button8_Click;
+            // 
             // groupBox2
             // 
             groupBox2.Controls.Add(button7);
             groupBox2.Controls.Add(label10);
             groupBox2.Controls.Add(dataGridView2);
             groupBox2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            groupBox2.Location = new Point(6, 391);
+            groupBox2.Location = new Point(7, 423);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(443, 394);
             groupBox2.TabIndex = 16;
@@ -359,6 +371,7 @@
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(174, 27);
             numericUpDown1.TabIndex = 11;
+            numericUpDown1.ValueChanged += numericUpDown1_ValueChanged;
             // 
             // loyaltyProgramBindingSource
             // 
@@ -546,5 +559,6 @@
         private DataGridViewTextBoxColumn PointsEarned;
         private DataGridViewTextBoxColumn BonusPoint;
         private BindingSource orderBindingSource;
+        private Button button8;
     }
 }
