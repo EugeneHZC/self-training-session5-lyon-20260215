@@ -95,6 +95,14 @@
             button4 = new Button();
             button3 = new Button();
             button2 = new Button();
+            panel3 = new Panel();
+            label35 = new Label();
+            label36 = new Label();
+            label37 = new Label();
+            label38 = new Label();
+            progressBar2 = new ProgressBar();
+            progressBar1 = new ProgressBar();
+            label39 = new Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)promotionBindingSource).BeginInit();
@@ -106,6 +114,7 @@
             tabPage4.SuspendLayout();
             tabPage5.SuspendLayout();
             panel2.SuspendLayout();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -118,7 +127,7 @@
             tabControl1.Location = new Point(0, 98);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(839, 626);
+            tabControl1.Size = new Size(839, 895);
             tabControl1.TabIndex = 2;
             tabControl1.Selecting += tabControl1_Selecting;
             // 
@@ -143,7 +152,7 @@
             tabPage1.Padding = new Padding(3);
             tabPage1.Size = new Size(831, 593);
             tabPage1.TabIndex = 0;
-            tabPage1.Text = "tabPage1";
+            tabPage1.Text = "Step 1";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // label12
@@ -282,6 +291,8 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(panel3);
+            tabPage2.Controls.Add(label39);
             tabPage2.Controls.Add(textBox7);
             tabPage2.Controls.Add(label11);
             tabPage2.Controls.Add(textBox6);
@@ -302,9 +313,9 @@
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(831, 593);
+            tabPage2.Size = new Size(831, 862);
             tabPage2.TabIndex = 1;
-            tabPage2.Text = "tabPage2";
+            tabPage2.Text = "Step 2";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // textBox7
@@ -484,7 +495,7 @@
             tabPage3.Padding = new Padding(3);
             tabPage3.Size = new Size(831, 593);
             tabPage3.TabIndex = 2;
-            tabPage3.Text = "tabPage3";
+            tabPage3.Text = "Step 3";
             tabPage3.UseVisualStyleBackColor = true;
             // 
             // numericUpDown2
@@ -562,7 +573,7 @@
             tabPage4.Padding = new Padding(3);
             tabPage4.Size = new Size(831, 593);
             tabPage4.TabIndex = 3;
-            tabPage4.Text = "tabPage4";
+            tabPage4.Text = "Step 4";
             tabPage4.UseVisualStyleBackColor = true;
             // 
             // label24
@@ -686,7 +697,7 @@
             tabPage5.Padding = new Padding(3);
             tabPage5.Size = new Size(831, 593);
             tabPage5.TabIndex = 4;
-            tabPage5.Text = "tabPage5";
+            tabPage5.Text = "Step 5";
             tabPage5.UseVisualStyleBackColor = true;
             // 
             // label32
@@ -743,7 +754,7 @@
             panel2.Controls.Add(button3);
             panel2.Controls.Add(button2);
             panel2.Dock = DockStyle.Bottom;
-            panel2.Location = new Point(0, 727);
+            panel2.Location = new Point(0, 999);
             panel2.Name = "panel2";
             panel2.Size = new Size(839, 52);
             panel2.TabIndex = 22;
@@ -779,11 +790,84 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // panel3
+            // 
+            panel3.Controls.Add(label35);
+            panel3.Controls.Add(label36);
+            panel3.Controls.Add(label37);
+            panel3.Controls.Add(label38);
+            panel3.Controls.Add(progressBar2);
+            panel3.Controls.Add(progressBar1);
+            panel3.Location = new Point(36, 621);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(686, 208);
+            panel3.TabIndex = 61;
+            // 
+            // label35
+            // 
+            label35.AutoSize = true;
+            label35.Location = new Point(589, 179);
+            label35.Name = "label35";
+            label35.Size = new Size(58, 20);
+            label35.TabIndex = 51;
+            label35.Text = "label35";
+            // 
+            // label36
+            // 
+            label36.AutoSize = true;
+            label36.Location = new Point(9, 179);
+            label36.Name = "label36";
+            label36.Size = new Size(58, 20);
+            label36.TabIndex = 50;
+            label36.Text = "label36";
+            // 
+            // label37
+            // 
+            label37.AutoSize = true;
+            label37.Location = new Point(9, 137);
+            label37.Name = "label37";
+            label37.Size = new Size(58, 20);
+            label37.TabIndex = 49;
+            label37.Text = "label37";
+            // 
+            // label38
+            // 
+            label38.AutoSize = true;
+            label38.Location = new Point(7, 59);
+            label38.Name = "label38";
+            label38.Size = new Size(58, 20);
+            label38.TabIndex = 48;
+            label38.Text = "label38";
+            // 
+            // progressBar2
+            // 
+            progressBar2.Location = new Point(0, 100);
+            progressBar2.Name = "progressBar2";
+            progressBar2.Size = new Size(686, 29);
+            progressBar2.TabIndex = 47;
+            // 
+            // progressBar1
+            // 
+            progressBar1.Location = new Point(0, 20);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new Size(686, 29);
+            progressBar1.TabIndex = 46;
+            // 
+            // label39
+            // 
+            label39.AutoSize = true;
+            label39.Location = new Point(36, 551);
+            label39.MaximumSize = new Size(700, 0);
+            label39.Name = "label39";
+            label39.Size = new Size(665, 40);
+            label39.TabIndex = 60;
+            label39.Text = "This conflict exists because the product is associated with multiple promotions of the same priority within the same partial or complete date period.";
+            // 
             // ConflictResolutionWizard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(839, 779);
+            ClientSize = new Size(839, 1051);
             Controls.Add(panel2);
             Controls.Add(tabControl1);
             Name = "ConflictResolutionWizard";
@@ -806,6 +890,8 @@
             tabPage5.ResumeLayout(false);
             tabPage5.PerformLayout();
             panel2.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -877,5 +963,13 @@
         private Button button5;
         private Label label33;
         private Label label34;
+        private Panel panel3;
+        private Label label35;
+        private Label label36;
+        private Label label37;
+        private Label label38;
+        private ProgressBar progressBar2;
+        private ProgressBar progressBar1;
+        private Label label39;
     }
 }
