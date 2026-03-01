@@ -73,11 +73,6 @@
             label22 = new Label();
             label23 = new Label();
             tabPage4 = new TabPage();
-            tabPage5 = new TabPage();
-            panel2 = new Panel();
-            button4 = new Button();
-            button3 = new Button();
-            button2 = new Button();
             label24 = new Label();
             checkedListBox1 = new CheckedListBox();
             label25 = new Label();
@@ -90,6 +85,16 @@
             label29 = new Label();
             label30 = new Label();
             label31 = new Label();
+            tabPage5 = new TabPage();
+            label32 = new Label();
+            button6 = new Button();
+            button5 = new Button();
+            label33 = new Label();
+            label34 = new Label();
+            panel2 = new Panel();
+            button4 = new Button();
+            button3 = new Button();
+            button2 = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)promotionBindingSource).BeginInit();
@@ -99,6 +104,7 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             tabPage4.SuspendLayout();
+            tabPage5.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
@@ -114,6 +120,7 @@
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(839, 626);
             tabControl1.TabIndex = 2;
+            tabControl1.Selecting += tabControl1_Selecting;
             // 
             // tabPage1
             // 
@@ -134,7 +141,7 @@
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(792, 593);
+            tabPage1.Size = new Size(831, 593);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
@@ -228,7 +235,6 @@
             // 
             // textBox2
             // 
-            textBox2.DataBindings.Add(new Binding("Text", promotionBindingSource, "DiscountType", true));
             textBox2.Location = new Point(162, 115);
             textBox2.Name = "textBox2";
             textBox2.ReadOnly = true;
@@ -296,7 +302,7 @@
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(792, 593);
+            tabPage2.Size = new Size(831, 593);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
@@ -476,7 +482,7 @@
             tabPage3.Location = new Point(4, 29);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(792, 593);
+            tabPage3.Size = new Size(831, 593);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "tabPage3";
             tabPage3.UseVisualStyleBackColor = true;
@@ -507,6 +513,7 @@
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(221, 27);
             numericUpDown1.TabIndex = 55;
+            numericUpDown1.ValueChanged += numericUpDown1_ValueChanged;
             // 
             // label21
             // 
@@ -558,58 +565,6 @@
             tabPage4.Text = "tabPage4";
             tabPage4.UseVisualStyleBackColor = true;
             // 
-            // tabPage5
-            // 
-            tabPage5.Location = new Point(4, 29);
-            tabPage5.Name = "tabPage5";
-            tabPage5.Padding = new Padding(3);
-            tabPage5.Size = new Size(792, 593);
-            tabPage5.TabIndex = 4;
-            tabPage5.Text = "tabPage5";
-            tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            panel2.Controls.Add(button4);
-            panel2.Controls.Add(button3);
-            panel2.Controls.Add(button2);
-            panel2.Dock = DockStyle.Bottom;
-            panel2.Location = new Point(0, 727);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(839, 52);
-            panel2.TabIndex = 22;
-            // 
-            // button4
-            // 
-            button4.Location = new Point(527, 3);
-            button4.Name = "button4";
-            button4.Size = new Size(82, 29);
-            button4.TabIndex = 22;
-            button4.Text = "Cancel";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
-            // 
-            // button3
-            // 
-            button3.Enabled = false;
-            button3.Location = new Point(627, 3);
-            button3.Name = "button3";
-            button3.Size = new Size(68, 29);
-            button3.TabIndex = 21;
-            button3.Text = "Back";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(711, 3);
-            button2.Name = "button2";
-            button2.Size = new Size(68, 29);
-            button2.TabIndex = 20;
-            button2.Text = "Next";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
             // label24
             // 
             label24.AutoSize = true;
@@ -627,6 +582,7 @@
             checkedListBox1.Name = "checkedListBox1";
             checkedListBox1.Size = new Size(450, 114);
             checkedListBox1.TabIndex = 68;
+            checkedListBox1.SelectedIndexChanged += checkedListBox1_SelectedIndexChanged;
             // 
             // label25
             // 
@@ -653,6 +609,7 @@
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(250, 27);
             dateTimePicker2.TabIndex = 65;
+            dateTimePicker2.ValueChanged += dateTimePicker2_ValueChanged;
             // 
             // label27
             // 
@@ -669,6 +626,7 @@
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(250, 27);
             dateTimePicker1.TabIndex = 63;
+            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             // 
             // label28
             // 
@@ -716,6 +674,111 @@
             label31.TabIndex = 58;
             label31.Text = "Step 4: Date/Product Adjustment";
             // 
+            // tabPage5
+            // 
+            tabPage5.Controls.Add(label32);
+            tabPage5.Controls.Add(button6);
+            tabPage5.Controls.Add(button5);
+            tabPage5.Controls.Add(label33);
+            tabPage5.Controls.Add(label34);
+            tabPage5.Location = new Point(4, 29);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Padding = new Padding(3);
+            tabPage5.Size = new Size(831, 593);
+            tabPage5.TabIndex = 4;
+            tabPage5.Text = "tabPage5";
+            tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // label32
+            // 
+            label32.AutoSize = true;
+            label32.Location = new Point(36, 173);
+            label32.Name = "label32";
+            label32.Size = new Size(583, 20);
+            label32.TabIndex = 64;
+            label32.Text = "Note: Saving will apply all changes to the database. Cancelling will discard all changes.";
+            // 
+            // button6
+            // 
+            button6.Location = new Point(252, 118);
+            button6.Name = "button6";
+            button6.Size = new Size(146, 29);
+            button6.TabIndex = 63;
+            button6.Text = "Cancel Changes";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
+            // 
+            // button5
+            // 
+            button5.Location = new Point(70, 118);
+            button5.Name = "button5";
+            button5.Size = new Size(146, 29);
+            button5.TabIndex = 62;
+            button5.Text = "Save Changes";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
+            // label33
+            // 
+            label33.AutoSize = true;
+            label33.Location = new Point(36, 69);
+            label33.Name = "label33";
+            label33.Size = new Size(387, 20);
+            label33.TabIndex = 61;
+            label33.Text = "Please review your changes and choose to save or cancel:";
+            // 
+            // label34
+            // 
+            label34.AutoSize = true;
+            label34.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label34.Location = new Point(36, 28);
+            label34.Name = "label34";
+            label34.Size = new Size(200, 23);
+            label34.TabIndex = 60;
+            label34.Text = "Step 5: Confirm Changes";
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(button4);
+            panel2.Controls.Add(button3);
+            panel2.Controls.Add(button2);
+            panel2.Dock = DockStyle.Bottom;
+            panel2.Location = new Point(0, 727);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(839, 52);
+            panel2.TabIndex = 22;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(527, 3);
+            button4.Name = "button4";
+            button4.Size = new Size(82, 29);
+            button4.TabIndex = 22;
+            button4.Text = "Cancel";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
+            // button3
+            // 
+            button3.Enabled = false;
+            button3.Location = new Point(627, 3);
+            button3.Name = "button3";
+            button3.Size = new Size(68, 29);
+            button3.TabIndex = 21;
+            button3.Text = "Back";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(711, 3);
+            button2.Name = "button2";
+            button2.Size = new Size(68, 29);
+            button2.TabIndex = 20;
+            button2.Text = "Next";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // ConflictResolutionWizard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -740,6 +803,8 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             tabPage4.ResumeLayout(false);
             tabPage4.PerformLayout();
+            tabPage5.ResumeLayout(false);
+            tabPage5.PerformLayout();
             panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -807,5 +872,10 @@
         private Label label29;
         private Label label30;
         private Label label31;
+        private Label label32;
+        private Button button6;
+        private Button button5;
+        private Label label33;
+        private Label label34;
     }
 }
