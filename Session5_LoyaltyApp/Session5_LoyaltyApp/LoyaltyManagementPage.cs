@@ -10,6 +10,7 @@ namespace Session5_LoyaltyApp
 
         private int maxPages;
         private int currentPage = 0;
+        private int points = 0;
 
         public LoyaltyManagementPage()
         {
@@ -62,6 +63,7 @@ namespace Session5_LoyaltyApp
 
             dataGridView1.ClearSelection();
             groupBox1.Hide();
+            groupBox2.Hide();
             dataGridView1.Enabled = true;
             UpdateButtonState();
         }
@@ -124,6 +126,56 @@ namespace Session5_LoyaltyApp
         {
             await Task.Delay(200);
             LoadTable();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            groupBox2.Show();
+            var customer = dataGridView1.SelectedRows[0].Tag as Customer;
+            int bonus5;
+            int pointsPer10Euros = customer.MembershipStatus switch
+            {
+                "Basic" => 10,
+                "Silver" => 13,
+                "Gold" => 15,
+                _ => 0
+            };
+
+            points = 0;
+
+            dataGridView2.DataSource = null;
+            dataGridView2.ClearSelection();
+
+            foreach (var order in customer.Orders)
+            {
+                bonus5 = 0;
+
+                if ((customer.JoinDate?.Month, customer.JoinDate?.Day) == (order.OrderDate.Month, order.OrderDate.Day))
+                {
+                    points += 25;
+                }
+
+                if (order.PromotionId != null)
+                {
+                    bonus5 = 5;
+                }
+
+                dataGridView2.Rows.Add(order.OrderDate, order.TotalAmount, (int)order.TotalAmount / 10 * pointsPer10Euros, bonus5);
+                points += (int)order.TotalAmount / 10 * pointsPer10Euros + bonus5;
+            }
+
+            orderBindingSource.DataSource = customer.Orders;
+
+            label10.Text = $"Total Points: {points}";
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            var loyaltyProgram = loyaltyProgramBindingSource.Current as LoyaltyProgram;
+            loyaltyProgram.Points = points;
+            numericUpDown1.Value = points;
+            MessageBox.Show("Points updated successfully.", "Success", MessageBoxButtons.OK);
+            groupBox2.Hide();
         }
     }
 }

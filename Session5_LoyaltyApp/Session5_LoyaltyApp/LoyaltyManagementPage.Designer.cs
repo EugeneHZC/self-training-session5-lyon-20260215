@@ -44,6 +44,15 @@
             customerBindingSource = new BindingSource(components);
             textBox1 = new TextBox();
             groupBox1 = new GroupBox();
+            groupBox2 = new GroupBox();
+            button7 = new Button();
+            label10 = new Label();
+            dataGridView2 = new DataGridView();
+            orderDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            totalAmountDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            PointsEarned = new DataGridViewTextBoxColumn();
+            BonusPoint = new DataGridViewTextBoxColumn();
+            orderBindingSource = new BindingSource(components);
             button6 = new Button();
             button5 = new Button();
             button4 = new Button();
@@ -64,6 +73,9 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customerBindingSource).BeginInit();
             groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)orderBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)loyaltyProgramBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customerBindingSource1).BeginInit();
@@ -200,6 +212,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(groupBox2);
             groupBox1.Controls.Add(button6);
             groupBox1.Controls.Add(button5);
             groupBox1.Controls.Add(button4);
@@ -223,6 +236,91 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Customer Details";
             // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(button7);
+            groupBox2.Controls.Add(label10);
+            groupBox2.Controls.Add(dataGridView2);
+            groupBox2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            groupBox2.Location = new Point(6, 391);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(443, 394);
+            groupBox2.TabIndex = 16;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Points Breakdown";
+            // 
+            // button7
+            // 
+            button7.Location = new Point(6, 339);
+            button7.Name = "button7";
+            button7.Size = new Size(149, 29);
+            button7.TabIndex = 8;
+            button7.Text = "Confirm Update";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(9, 307);
+            label10.Name = "label10";
+            label10.Size = new Size(58, 20);
+            label10.TabIndex = 1;
+            label10.Text = "label10";
+            // 
+            // dataGridView2
+            // 
+            dataGridView2.AllowUserToAddRows = false;
+            dataGridView2.AllowUserToDeleteRows = false;
+            dataGridView2.AutoGenerateColumns = false;
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { orderDateDataGridViewTextBoxColumn, totalAmountDataGridViewTextBoxColumn, PointsEarned, BonusPoint });
+            dataGridView2.DataSource = orderBindingSource;
+            dataGridView2.Location = new Point(9, 35);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.ReadOnly = true;
+            dataGridView2.RowHeadersWidth = 51;
+            dataGridView2.Size = new Size(428, 252);
+            dataGridView2.TabIndex = 0;
+            // 
+            // orderDateDataGridViewTextBoxColumn
+            // 
+            orderDateDataGridViewTextBoxColumn.DataPropertyName = "OrderDate";
+            orderDateDataGridViewTextBoxColumn.HeaderText = "Order Date";
+            orderDateDataGridViewTextBoxColumn.MinimumWidth = 6;
+            orderDateDataGridViewTextBoxColumn.Name = "orderDateDataGridViewTextBoxColumn";
+            orderDateDataGridViewTextBoxColumn.ReadOnly = true;
+            orderDateDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // totalAmountDataGridViewTextBoxColumn
+            // 
+            totalAmountDataGridViewTextBoxColumn.DataPropertyName = "TotalAmount";
+            totalAmountDataGridViewTextBoxColumn.HeaderText = "Total Amount";
+            totalAmountDataGridViewTextBoxColumn.MinimumWidth = 6;
+            totalAmountDataGridViewTextBoxColumn.Name = "totalAmountDataGridViewTextBoxColumn";
+            totalAmountDataGridViewTextBoxColumn.ReadOnly = true;
+            totalAmountDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // PointsEarned
+            // 
+            PointsEarned.HeaderText = "Points Earned";
+            PointsEarned.MinimumWidth = 6;
+            PointsEarned.Name = "PointsEarned";
+            PointsEarned.ReadOnly = true;
+            PointsEarned.Width = 125;
+            // 
+            // BonusPoint
+            // 
+            BonusPoint.HeaderText = "Bonus Point";
+            BonusPoint.MinimumWidth = 6;
+            BonusPoint.Name = "BonusPoint";
+            BonusPoint.ReadOnly = true;
+            BonusPoint.Width = 125;
+            // 
+            // orderBindingSource
+            // 
+            orderBindingSource.DataSource = typeof(models.Order);
+            // 
             // button6
             // 
             button6.Location = new Point(250, 331);
@@ -231,6 +329,7 @@
             button6.TabIndex = 14;
             button6.Text = "Recalculate Points";
             button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // button5
             // 
@@ -393,6 +492,10 @@
             ((System.ComponentModel.ISupportInitialize)customerBindingSource).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)orderBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ((System.ComponentModel.ISupportInitialize)loyaltyProgramBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)customerBindingSource1).EndInit();
@@ -434,5 +537,14 @@
         private Label label4;
         private BindingSource loyaltyProgramBindingSource;
         private BindingSource customerBindingSource1;
+        private GroupBox groupBox2;
+        private Button button7;
+        private Label label10;
+        private DataGridView dataGridView2;
+        private DataGridViewTextBoxColumn orderDateDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn totalAmountDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn PointsEarned;
+        private DataGridViewTextBoxColumn BonusPoint;
+        private BindingSource orderBindingSource;
     }
 }
