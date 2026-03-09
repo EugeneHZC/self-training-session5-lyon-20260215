@@ -16,6 +16,7 @@ namespace Session5_PromotionsApp
         private bool itemsValid = false;
         private List<string> productsToRemove;
         private int pixelsPerDay = 10;
+        private int currentStep = 0;
 
         public ConflictResolutionWizard(Promotion currentPromotion, Dictionary<Promotion, string> allConflictedPromotions)
         {
@@ -27,6 +28,8 @@ namespace Session5_PromotionsApp
             button3.Enabled = false;
             label24.Visible = false;
             label24.ForeColor = ColorTranslator.FromHtml("#7a8c69");
+            label40.ForeColor = ColorTranslator.FromHtml("#c75d4d");
+            label40.Visible = false;
         }
 
         private void ResetAll()
@@ -35,10 +38,19 @@ namespace Session5_PromotionsApp
             UpdatePage();
             button3.Enabled = false;
             label24.Visible = false;
+            checkedListBox1.DataSource = null;
             checkedListBox1.Items.Clear();
             dateValid = false;
             startDate = null;
             endDate = null;
+        }
+
+        private string GetProductNames(string applicableProductsIds)
+        {
+            var productIds = applicableProductsIds.Split(",").ToList();
+            var productNamesList = Helper.db.Products.Where(x => productIds.Contains(x.ProductId.ToString())).Select(x => x.ProductName).ToList();
+            var productNames = string.Join(",", productNamesList);
+            return productNames;
         }
 
         private void LoadStep1()
@@ -49,6 +61,10 @@ namespace Session5_PromotionsApp
                 textBox2.Text = $"{currentPromotion.DiscountType} {currentPromotion.DiscountValue}{(currentPromotion.DiscountType == "Percentage" ? "%" : " euros")}";
                 textBox4.Text = $"{currentPromotion.StartDate} - {currentPromotion.EndDate}";
 
+                // load product's names
+                var currentPromoProductNames = GetProductNames(currentPromotion.ApplicableProducts);
+                textBox3.Text = string.Join(",", currentPromoProductNames);
+
                 flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
                 flowLayoutPanel1.WrapContents = false;
                 flowLayoutPanel1.AutoScroll = true;
@@ -56,13 +72,15 @@ namespace Session5_PromotionsApp
                 for (int i = 0; i < allConflictedPromotions.Count(); i++)
                 {
                     var promo = allConflictedPromotions.ToList()[i];
+                    var productNames = GetProductNames(promo.Key.ApplicableProducts);
+
                     RadioButton radioButton = new RadioButton();
                     radioButton.Tag = promo;
                     radioButton.AutoSize = true;
                     radioButton.MaximumSize = new Size(500, 0);
                     radioButton.Text = $"Conflict {i + 1}\n" +
                         $"Existing Promotion: {promo.Key.PromotionName}\n" +
-                        $"Conflicting Product: {promo.Value}\n" +
+                        $"Conflicting Product: {productNames}\n" +
                         $"Date Range: {promo.Key.StartDate} - {promo.Key.EndDate}\n" +
                         $"Priority: {promo.Key.Priority}\n";
                     flowLayoutPanel1.Controls.Add(radioButton);
@@ -73,11 +91,10 @@ namespace Session5_PromotionsApp
         private void LoadStep2()
         {
             promotionBindingSource1.DataSource = selectedConflictPromo;
-            textBox7.Text = conflictedProducts;
+            textBox7.Text = GetProductNames(conflictedProducts);
             textBox8.Text = $"{selectedConflictPromo.StartDate} - {selectedConflictPromo.EndDate}";
             textBox11.Text = $"{currentPromotion.StartDate} - {currentPromotion.EndDate}";
 
-            var latestEndDate = Math.Max(currentPromotion.EndDate.DayNumber, selectedConflictPromo.EndDate.DayNumber);
             var earliestStartDate = Math.Min(currentPromotion.StartDate.DayNumber, selectedConflictPromo.StartDate.DayNumber);
 
             var currPromotionDateDiff = currentPromotion.EndDate.DayNumber - currentPromotion.StartDate.DayNumber;
@@ -97,23 +114,27 @@ namespace Session5_PromotionsApp
                 progressBar1.Width = (conflictedPromotionDateDiff) * pixelsPerDay;
             }
 
-            progressBar1.BackColor = Color.LightGray;
+            progressBar1.BackColor = Color.Gray;
             progressBar2.BackColor = Color.Gray;
 
             label38.Text = selectedConflictPromo.PromotionName;
             label37.Text = currentPromotion.PromotionName;
 
             label36.Text = currentPromotion.StartDate > selectedConflictPromo.StartDate ? $"{selectedConflictPromo.StartDate:yyyy-MM-dd}" : $"{currentPromotion.StartDate:yyyy-MM-dd}";
-            label35.Text = currentPromotion.EndDate > selectedConflictPromo.EndDate ? $"{currentPromotion.EndDate:yyyy-MM-dd}" : $"{selectedConflictPromo.StartDate:yyyy-MM-dd}";
+            label35.Text = currentPromotion.EndDate > selectedConflictPromo.EndDate ? $"{currentPromotion.EndDate:yyyy-MM-dd}" : $"{selectedConflictPromo.EndDate:yyyy-MM-dd}";
         }
 
         private void LoadStep4()
         {
             textBox13.Text = $"{currentPromotion.StartDate} - {currentPromotion.EndDate}";
 
+            var products = Helper.db.Products.ToList();
+
             if (checkedListBox1.Items.Count == 0)
             {
-                checkedListBox1.Items.AddRange(conflictedProducts.Split(","));
+                checkedListBox1.DataSource = products;
+                checkedListBox1.DisplayMember = "ProductName";
+                checkedListBox1.ValueMember = "ProductId";
             }
 
             button2.Enabled = false;
@@ -131,6 +152,7 @@ namespace Session5_PromotionsApp
         private void UpdatePage()
         {
             button2.Text = "Next";
+            tabControl1.SelectedIndex = currentStep;
 
             switch (tabControl1.SelectedIndex)
             {
@@ -148,37 +170,50 @@ namespace Session5_PromotionsApp
             }
         }
 
+        // next button clicked
         private void button2_Click(object sender, EventArgs e)
         {
-            var selectedRadioButton = flowLayoutPanel1.Controls.OfType<RadioButton>().FirstOrDefault(x => x.Checked);
-
-            if (selectedRadioButton != null)
+            if (tabControl1.SelectedIndex == 0)
             {
-                var selected = (KeyValuePair<Promotion, string>)selectedRadioButton.Tag;
-                selectedConflictPromo = selected.Key;
-                conflictedProducts = selected.Value;
+                var selectedRadioButton = flowLayoutPanel1.Controls.OfType<RadioButton>().FirstOrDefault(x => x.Checked);
 
-                tabControl1.SelectedIndex++;
-                tabControl1.SelectedIndex = Math.Max(0, Math.Min(maxStepIndex, tabControl1.SelectedIndex));
-                UpdateButton();
-                UpdatePage();
+                if (selectedRadioButton != null)
+                {
+                    var selected = (KeyValuePair<Promotion, string>)selectedRadioButton.Tag;
+                    selectedConflictPromo = selected.Key;
+                    conflictedProducts = selected.Value;
+                }
+                else
+                {
+                    return;
+                }
             }
+
+            currentStep++;
+            currentStep = Math.Max(0, Math.Min(maxStepIndex, currentStep));
+            UpdatePage();
+            UpdateButton();
         }
 
+        // back button clicked
         private void button3_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedIndex--;
-            tabControl1.SelectedIndex = Math.Max(0, Math.Min(maxStepIndex, tabControl1.SelectedIndex));
-            UpdateButton();
+            currentStep--;
+            currentStep = Math.Max(0, Math.Min(maxStepIndex, currentStep));
             UpdatePage();
+            UpdateButton();
         }
 
+        // cancel nav button clicked
         private void button4_Click(object sender, EventArgs e)
         {
             ResetAll();
-            tabControl1.SelectedIndex = 4;
+            currentStep = 4;
+            UpdatePage();
+            UpdateButton();
         }
 
+        // cancel button in step 5 clicked
         private void button6_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to cancel the new/modified promotion? No changes will be made to the database.", "Cancel Confirmation", MessageBoxButtons.OKCancel) == DialogResult.OK)
@@ -192,6 +227,7 @@ namespace Session5_PromotionsApp
             }
         }
 
+        // save changes button in step 5 clicked
         private void button5_Click(object sender, EventArgs e)
         {
             if (priorityChanged != null && startDate != null && endDate != null)
@@ -221,6 +257,15 @@ namespace Session5_PromotionsApp
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             priorityChanged = (int)numericUpDown1.Value;
+
+            if (priorityChanged > currentPromotion.Priority)
+            {
+                label40.Visible = true;
+            }
+            else
+            {
+                label40.Visible = false;
+            }
         }
 
         private void GetNewDate()
@@ -263,19 +308,20 @@ namespace Session5_PromotionsApp
             label24.Visible = false;
             itemsValid = false;
 
-            var oriProducts = currentPromotion.ApplicableProducts.Split(",");
+            var selectedConflictProducts = conflictedProducts.Split(",");
 
             for (int i = 0; i < checkedListBox1.Items.Count; i++)
             {
-                var item = checkedListBox1.Items[i];
+                var item = checkedListBox1.Items[i] as Product;
 
-                if (!checkedListBox1.CheckedItems.Contains(item) && oriProducts.Contains(item.ToString()) && !dateValid)
+                if (!checkedListBox1.CheckedItems.Cast<Product>().Select(x => x.ProductId).ToList().Contains(item.ProductId) && selectedConflictProducts.Contains(item.ProductId.ToString()) && !dateValid)
                 {
                     return;
                 }
             }
 
-            productsToRemove = checkedListBox1.CheckedItems.Cast<String>().ToList();
+            productsToRemove = checkedListBox1.CheckedItems.Cast<Product>().Select(x => x.ProductId.ToString()).ToList();
+
             label24.Visible = true;
             button2.Enabled = true;
             itemsValid = true;
@@ -283,7 +329,10 @@ namespace Session5_PromotionsApp
 
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            //e.Cancel = true;
+            if (currentStep != tabControl1.SelectedIndex)
+            {
+                tabControl1.SelectedIndex = currentStep;
+            }
         }
     }
 }

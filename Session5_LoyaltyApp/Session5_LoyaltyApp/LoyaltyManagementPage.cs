@@ -41,12 +41,9 @@ namespace Session5_LoyaltyApp
                 .ToList();
 
             maxPages = (int)Math.Ceiling(temp.Count / 10.0);
+            currentPage = 0;
 
-            var results = temp.Skip(currentPage * 10)
-                    .Take(10)
-                    .ToList();
-
-            foreach (var c in results)
+            foreach (var c in temp)
             {
                 dataGridView1.Rows.Add(
                     c.CustomerId,
@@ -60,12 +57,25 @@ namespace Session5_LoyaltyApp
                 dataGridView1.Rows[^1].Tag = c;
             }
 
-            label3.Text = $"Page {currentPage + 1} of {maxPages}";
+            LoadPage();
 
             dataGridView1.ClearSelection();
             groupBox1.Hide();
             groupBox2.Hide();
             dataGridView1.Enabled = true;
+        }
+
+        private void LoadPage()
+        {
+            var firstRow = currentPage * 10;
+            var lastRow = firstRow + 10;
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                row.Visible = row.Index >= firstRow && row.Index <= lastRow;
+            }
+
+            label3.Text = $"Page {currentPage + 1} of {maxPages}";
             UpdateButtonState();
         }
 
@@ -75,20 +85,20 @@ namespace Session5_LoyaltyApp
             button3.Enabled = currentPage != maxPages - 1;
         }
 
+        // previous button
         private void button2_Click(object sender, EventArgs e)
         {
             currentPage--;
             currentPage = Math.Max(0, Math.Min(maxPages - 1, currentPage));
-            LoadTable();
-            UpdateButtonState();
+            LoadPage();
         }
 
+        // next button
         private void button3_Click(object sender, EventArgs e)
         {
             currentPage++;
             currentPage = Math.Max(0, Math.Min(maxPages - 1, currentPage));
-            LoadTable();
-            UpdateButtonState();
+            LoadPage();
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -105,6 +115,7 @@ namespace Session5_LoyaltyApp
             }
         }
 
+        // cancel button
         private void button5_Click(object sender, EventArgs e)
         {
             Helper.db.ChangeTracker.Entries().ToList().ForEach(x => x.State = Microsoft.EntityFrameworkCore.EntityState.Unchanged);
@@ -112,6 +123,7 @@ namespace Session5_LoyaltyApp
             groupBox1.Hide();
         }
 
+        // save button
         private void button4_Click(object sender, EventArgs e)
         {
             var loyaltyProgram = loyaltyProgramBindingSource.Current as LoyaltyProgram;
@@ -129,15 +141,16 @@ namespace Session5_LoyaltyApp
             LoadTable();
         }
 
+        // recalculate points button
         private void button6_Click(object sender, EventArgs e)
         {
             groupBox2.Show();
             var customer = dataGridView1.SelectedRows[0].Tag as Customer;
-            int bonus5;
+            int bonus;
             int pointsPer10Euros = customer.MembershipStatus switch
             {
                 "Basic" => 10,
-                "Silver" => 13,
+                "Silver" => 12,
                 "Gold" => 15,
                 _ => 0
             };
@@ -149,27 +162,28 @@ namespace Session5_LoyaltyApp
 
             foreach (var order in customer.Orders)
             {
-                bonus5 = 0;
-
-                if ((customer.JoinDate?.Month, customer.JoinDate?.Day) == (order.OrderDate.Month, order.OrderDate.Day))
-                {
-                    points += 25;
-                }
+                int amount = (int)(order.TotalAmount - order.DiscountAmount) / 10;
+                bonus = 0;
 
                 if (order.PromotionId != null)
                 {
-                    bonus5 = 5;
+                    bonus += 5;
                 }
 
-                dataGridView2.Rows.Add(order.OrderDate, order.TotalAmount, (int)order.TotalAmount / 10 * pointsPer10Euros, bonus5);
-                points += (int)order.TotalAmount / 10 * pointsPer10Euros + bonus5;
-            }
+                if ((customer.JoinDate?.Month, customer.JoinDate?.Day) == (order.OrderDate.Month, order.OrderDate.Day))
+                {
+                    bonus += 25;
+                }
 
-            orderBindingSource.DataSource = customer.Orders;
+                dataGridView2.Rows.Add(order.OrderDate, order.TotalAmount, amount * pointsPer10Euros, bonus);
+
+                points += amount * pointsPer10Euros + bonus;
+            }
 
             label10.Text = $"Total Points: {points}";
         }
 
+        // confirm update button under order table
         private void button7_Click(object sender, EventArgs e)
         {
             var loyaltyProgram = loyaltyProgramBindingSource.Current as LoyaltyProgram;
@@ -184,6 +198,7 @@ namespace Session5_LoyaltyApp
             button8.Visible = numericUpDown1.Value >= 1000;
         }
 
+        // redeem rewards button
         private void button8_Click(object sender, EventArgs e)
         {
             var customer = dataGridView1.SelectedRows[0].Tag as Customer;
@@ -192,6 +207,12 @@ namespace Session5_LoyaltyApp
             loyaltyProgramBindingSource.ResetCurrentItem();
             loyaltyProgramBindingSource.DataSource = loyalty;
             LoadTable();
+        }
+
+        private void dataGridView1_Sorted(object sender, EventArgs e)
+        {
+            currentPage = 0;
+            LoadPage();
         }
     }
 }

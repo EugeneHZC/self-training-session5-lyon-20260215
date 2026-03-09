@@ -24,6 +24,7 @@ namespace Session5_LoyaltyApp
             this.Close();
         }
 
+        // 5 euros discount button
         private void button2_Click(object sender, EventArgs e)
         {
             var newPromotion = new Promotion()
@@ -49,6 +50,7 @@ namespace Session5_LoyaltyApp
             this.Close();
         }
 
+        // 10% discount button
         private void button3_Click(object sender, EventArgs e)
         {
             var newPromotion = new Promotion()
@@ -74,6 +76,7 @@ namespace Session5_LoyaltyApp
             this.Close();
         }
 
+        // upgrade membership tier button
         private void button4_Click(object sender, EventArgs e)
         {
             var tierUpgrade = this.loyaltyProgram.MembershipTier switch
