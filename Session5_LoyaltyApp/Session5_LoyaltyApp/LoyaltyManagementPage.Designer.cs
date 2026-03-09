@@ -136,6 +136,7 @@
             dataGridView1.Size = new Size(655, 250);
             dataGridView1.TabIndex = 8;
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+            dataGridView1.Sorted += dataGridView1_Sorted;
             // 
             // customerIdDataGridViewTextBoxColumn
             // 

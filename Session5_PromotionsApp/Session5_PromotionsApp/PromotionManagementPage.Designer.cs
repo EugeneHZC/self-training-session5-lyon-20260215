@@ -84,6 +84,7 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(775, 248);
             dataGridView1.TabIndex = 2;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
@@ -229,6 +230,7 @@
             button4.TabIndex = 19;
             button4.Text = "Cancel";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // button3
             // 
@@ -335,6 +337,7 @@
             // numericUpDown1
             // 
             numericUpDown1.DataBindings.Add(new Binding("Value", promotionBindingSource1, "DiscountValue", true));
+            numericUpDown1.DecimalPlaces = 2;
             numericUpDown1.Location = new Point(193, 168);
             numericUpDown1.Maximum = new decimal(new int[] { 100000000, 0, 0, 0 });
             numericUpDown1.Name = "numericUpDown1";

@@ -47,6 +47,14 @@
             label3 = new Label();
             label2 = new Label();
             tabPage2 = new TabPage();
+            panel3 = new Panel();
+            label35 = new Label();
+            label36 = new Label();
+            label37 = new Label();
+            label38 = new Label();
+            progressBar2 = new ProgressBar();
+            progressBar1 = new ProgressBar();
+            label39 = new Label();
             textBox7 = new TextBox();
             label11 = new Label();
             textBox6 = new TextBox();
@@ -66,6 +74,7 @@
             label18 = new Label();
             label19 = new Label();
             tabPage3 = new TabPage();
+            label40 = new Label();
             numericUpDown2 = new NumericUpDown();
             label20 = new Label();
             numericUpDown1 = new NumericUpDown();
@@ -95,18 +104,11 @@
             button4 = new Button();
             button3 = new Button();
             button2 = new Button();
-            panel3 = new Panel();
-            label35 = new Label();
-            label36 = new Label();
-            label37 = new Label();
-            label38 = new Label();
-            progressBar2 = new ProgressBar();
-            progressBar1 = new ProgressBar();
-            label39 = new Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)promotionBindingSource).BeginInit();
             tabPage2.SuspendLayout();
+            panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)promotionBindingSource1).BeginInit();
             tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
@@ -114,7 +116,6 @@
             tabPage4.SuspendLayout();
             tabPage5.SuspendLayout();
             panel2.SuspendLayout();
-            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -150,7 +151,7 @@
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(831, 593);
+            tabPage1.Size = new Size(831, 862);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Step 1";
             tabPage1.UseVisualStyleBackColor = true;
@@ -225,7 +226,6 @@
             // 
             // textBox3
             // 
-            textBox3.DataBindings.Add(new Binding("Text", promotionBindingSource, "ApplicableProducts", true));
             textBox3.Location = new Point(162, 160);
             textBox3.Name = "textBox3";
             textBox3.ReadOnly = true;
@@ -317,6 +317,79 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Step 2";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(label35);
+            panel3.Controls.Add(label36);
+            panel3.Controls.Add(label37);
+            panel3.Controls.Add(label38);
+            panel3.Controls.Add(progressBar2);
+            panel3.Controls.Add(progressBar1);
+            panel3.Location = new Point(36, 621);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(686, 208);
+            panel3.TabIndex = 61;
+            // 
+            // label35
+            // 
+            label35.AutoSize = true;
+            label35.Location = new Point(589, 179);
+            label35.Name = "label35";
+            label35.Size = new Size(58, 20);
+            label35.TabIndex = 51;
+            label35.Text = "label35";
+            // 
+            // label36
+            // 
+            label36.AutoSize = true;
+            label36.Location = new Point(9, 179);
+            label36.Name = "label36";
+            label36.Size = new Size(58, 20);
+            label36.TabIndex = 50;
+            label36.Text = "label36";
+            // 
+            // label37
+            // 
+            label37.AutoSize = true;
+            label37.Location = new Point(9, 137);
+            label37.Name = "label37";
+            label37.Size = new Size(58, 20);
+            label37.TabIndex = 49;
+            label37.Text = "label37";
+            // 
+            // label38
+            // 
+            label38.AutoSize = true;
+            label38.Location = new Point(7, 59);
+            label38.Name = "label38";
+            label38.Size = new Size(58, 20);
+            label38.TabIndex = 48;
+            label38.Text = "label38";
+            // 
+            // progressBar2
+            // 
+            progressBar2.Location = new Point(0, 100);
+            progressBar2.Name = "progressBar2";
+            progressBar2.Size = new Size(686, 29);
+            progressBar2.TabIndex = 47;
+            // 
+            // progressBar1
+            // 
+            progressBar1.Location = new Point(0, 20);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new Size(686, 29);
+            progressBar1.TabIndex = 46;
+            // 
+            // label39
+            // 
+            label39.AutoSize = true;
+            label39.Location = new Point(36, 551);
+            label39.MaximumSize = new Size(700, 0);
+            label39.Name = "label39";
+            label39.Size = new Size(665, 40);
+            label39.TabIndex = 60;
+            label39.Text = "This conflict exists because the product is associated with multiple promotions of the same priority within the same partial or complete date period.";
             // 
             // textBox7
             // 
@@ -484,6 +557,7 @@
             // 
             // tabPage3
             // 
+            tabPage3.Controls.Add(label40);
             tabPage3.Controls.Add(numericUpDown2);
             tabPage3.Controls.Add(label20);
             tabPage3.Controls.Add(numericUpDown1);
@@ -493,10 +567,19 @@
             tabPage3.Location = new Point(4, 29);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(831, 593);
+            tabPage3.Size = new Size(831, 862);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Step 3";
             tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label40
+            // 
+            label40.AutoSize = true;
+            label40.Location = new Point(30, 241);
+            label40.Name = "label40";
+            label40.Size = new Size(634, 20);
+            label40.TabIndex = 58;
+            label40.Text = "Warning: Increasing priority might impact other promotions or have unintended consequences.";
             // 
             // numericUpDown2
             // 
@@ -571,7 +654,7 @@
             tabPage4.Location = new Point(4, 29);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(831, 593);
+            tabPage4.Size = new Size(831, 862);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Step 4";
             tabPage4.UseVisualStyleBackColor = true;
@@ -695,7 +778,7 @@
             tabPage5.Location = new Point(4, 29);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new Padding(3);
-            tabPage5.Size = new Size(831, 593);
+            tabPage5.Size = new Size(831, 862);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Step 5";
             tabPage5.UseVisualStyleBackColor = true;
@@ -790,79 +873,6 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
-            // panel3
-            // 
-            panel3.Controls.Add(label35);
-            panel3.Controls.Add(label36);
-            panel3.Controls.Add(label37);
-            panel3.Controls.Add(label38);
-            panel3.Controls.Add(progressBar2);
-            panel3.Controls.Add(progressBar1);
-            panel3.Location = new Point(36, 621);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(686, 208);
-            panel3.TabIndex = 61;
-            // 
-            // label35
-            // 
-            label35.AutoSize = true;
-            label35.Location = new Point(589, 179);
-            label35.Name = "label35";
-            label35.Size = new Size(58, 20);
-            label35.TabIndex = 51;
-            label35.Text = "label35";
-            // 
-            // label36
-            // 
-            label36.AutoSize = true;
-            label36.Location = new Point(9, 179);
-            label36.Name = "label36";
-            label36.Size = new Size(58, 20);
-            label36.TabIndex = 50;
-            label36.Text = "label36";
-            // 
-            // label37
-            // 
-            label37.AutoSize = true;
-            label37.Location = new Point(9, 137);
-            label37.Name = "label37";
-            label37.Size = new Size(58, 20);
-            label37.TabIndex = 49;
-            label37.Text = "label37";
-            // 
-            // label38
-            // 
-            label38.AutoSize = true;
-            label38.Location = new Point(7, 59);
-            label38.Name = "label38";
-            label38.Size = new Size(58, 20);
-            label38.TabIndex = 48;
-            label38.Text = "label38";
-            // 
-            // progressBar2
-            // 
-            progressBar2.Location = new Point(0, 100);
-            progressBar2.Name = "progressBar2";
-            progressBar2.Size = new Size(686, 29);
-            progressBar2.TabIndex = 47;
-            // 
-            // progressBar1
-            // 
-            progressBar1.Location = new Point(0, 20);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(686, 29);
-            progressBar1.TabIndex = 46;
-            // 
-            // label39
-            // 
-            label39.AutoSize = true;
-            label39.Location = new Point(36, 551);
-            label39.MaximumSize = new Size(700, 0);
-            label39.Name = "label39";
-            label39.Size = new Size(665, 40);
-            label39.TabIndex = 60;
-            label39.Text = "This conflict exists because the product is associated with multiple promotions of the same priority within the same partial or complete date period.";
-            // 
             // ConflictResolutionWizard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -880,6 +890,8 @@
             ((System.ComponentModel.ISupportInitialize)promotionBindingSource).EndInit();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)promotionBindingSource1).EndInit();
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
@@ -890,8 +902,6 @@
             tabPage5.ResumeLayout(false);
             tabPage5.PerformLayout();
             panel2.ResumeLayout(false);
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -971,5 +981,6 @@
         private ProgressBar progressBar2;
         private ProgressBar progressBar1;
         private Label label39;
+        private Label label40;
     }
 }
